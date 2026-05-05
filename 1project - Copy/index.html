@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Css/index.css" />
+    <link rel="stylesheet" href="./fontawesome-free-7.1.0-web/css/all.min.css" />
+    <title>Novelix</title>
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="./images/2232688.png" alt="" />
+          <a href="#">Novelix</a>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a class="actev" href="index.html">HOME</a></li>
+            <li><a href="prodect.html">Prodect</a></li>
+            <li><a href="conent.html">Content</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="login.html">Login</a>
+            </li>
+
+            <!-- Search input مع أيقونة البحث ثابتة الحجم -->
+            <li class="search-container" style="position: relative">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search book..."
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div id="suggestions"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ================= HOME ================= -->
+    <div class="home">
+      <div class="container">
+        <div>
+          <h1>Welcome To Novelix Library</h1>
+          <p>Where Stories Live Forever</p>
+          <a href="#down">Show Book</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= BOOK CATEGORIES ================= -->
+    <section id="down" class="container">
+      <h2 class="section-title">Book Categories</h2>
+
+      <!-- ===== READ CATEGORIES ===== -->
+      <div class="categories">
+        <div class="category">
+          <img src="images/ttec.jfif" alt="Technology" class="category-img" />
+          <h5 class="title1">Technology Books</h5>
+          <a href="Technology.html" class="btn">READ</a>
+        </div>
+        
+
+        <div class="category">
+          <img
+            src="images/Technology.jpg"
+            alt="Technology"
+            class="category-img"
+          />
+          <h5 class="title1">Programing Books</h5>
+          <a class="btn" href="programing.html">READ</a>
+        </div>
+
+        <div class="category">
+          <img src="images/download.jfif" alt="Sci-Fi" class="category-img" />
+          <h5 class="title1">Islamic Fiction</h5>
+          <a class="btn" href="Islamic.html">READ</a>
+        </div>
+
+        <div class="category">
+          <img src="images/novels.jpg" alt="novels" class="category-img" />
+          <h5 class="title1">Novels Books</h5>
+          <a class="btn" href="novels.html">READ</a>
+        </div>
+      </div>
+
+      <!-- ===== SHOP CATEGORIES ===== -->
+      <div class="categories">
+        <div class="category">
+          <img
+            src="images/download1234.jfif"
+            alt="History"
+            class="category-img"
+          />
+          <h5 class="title1">Trending Books</h5>
+          <a  href="prodect.html#books" class="btn" >SHOP</a>
+        </div>
+        <div class="category">
+          <img
+            src="images/english11(1).jfif"
+            alt="English"
+            class="category-img"
+          />
+          <h5 class="title1">English Books</h5>
+          <a href="prodect.html#eng" class="btn">SHOP</a>
+        </div>
+
+        <div class="category">
+          <img src="images/ove(1).jfif" alt="Love" class="category-img" />
+          <h5 class="title1">Love books</h5>
+          <a href="prodect.html#love" class="btn">SHOP</a>
+        </div>
+
+        <div class="category">
+          <img
+            src="images/Science Fiction.jpg"
+            alt="Sci-Fi"
+            class="category-img"
+          />
+          <h5 class="title1">Science Fiction</h5>
+          <a href="prodect.html#scie" class="btn">SHOP</a>
+        </div>
+
+        
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Novelix</h3>
+          <p>
+            Novelix is a creative library offering a wide range of books,
+            workshops, and community events for all ages.
+          </p>
+
+          <div class="social-icons">
+            <a href="https://www.facebook.com/hassan.ebrahim.175759">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/ah4162973?igsh=M2QzaWYxNjVwZnY4&utm_source=qr"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Working Hours</h3>
+          <p>Saturday - Thursday: 9:00 AM - 9:00 PM</p>
+          <p>Friday: 2:00 PM - 10:00 PM</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>Phone: +201020806199</p>
+          <p>Address: 123 Novelix Street, EL kafr El-Sheikh, Egypt</p>
+          <p>Email: hassan@Novelix.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="symbol">&copy;</span> 2025 Novelix . All rights reserved.
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const suggestions = document.getElementById("suggestions");
+
+        searchInput.addEventListener("input", async function () {
+          const value = searchInput.value.trim();
+
+          // لو فاضي اقفل القائمة
+          if (value.length === 0) {
+            suggestions.style.display = "none";
+            return;
+          }
+
+          try {
+            const res = await fetch(`http://localhost:3000/search?q=${value}`);
+            const data = await res.json();
+
+            // لو مفيش نتائج
+            if (!data.length) {
+              suggestions.style.display = "none";
+              return;
+            }
+
+            // عرض النتائج
+            suggestions.style.display = "block";
+
+            suggestions.innerHTML = data
+              .map(
+                (book) => `
+        <div onclick="openBook('${book._id}')">
+          ${book.title}
+        </div>
+      `,
+              )
+              .join("");
+          } catch (err) {
+            console.log("Search error:", err);
+          }
+        });
+      });
+
+      // لما تضغط على كتاب
+      function openBook(id) {
+        window.location.href = `Home.html?id=${id}`;
+      }
+    </script>
+  </body>
+</html>

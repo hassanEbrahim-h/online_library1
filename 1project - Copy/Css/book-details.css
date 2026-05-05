@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+
+@import url('home.css');
+
+body {
+    font-family: 'Poppins', 'Tajawal', sans-serif;
+}
+
+/* ================= BOOK DETAILS SECTION ================= */
+.book-details-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    margin-top: 80px;
+}
+
+.book-card-large {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    max-width: 900px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+}
+
+.book-card-large:hover {
+    transform: translateY(-5px);
+}
+
+.book-image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: transparent;
+}
+
+.book-image-section img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+}
+
+.book-image-section i {
+    font-size: 150px;
+    color: #c5aa5c;
+    text-shadow: 0 0 20px rgba(194, 192, 30, 0.5);
+}
+
+.book-image-section img:hover {
+    transform: scale(1.05);
+}
+
+.book-info-section {
+    flex: 1.5;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.book-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+    background: linear-gradient(to right, #c5aa5c, #ffbf00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.book-author {
+    font-size: 18px;
+    color: #94a3b8;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.book-description {
+    font-size: 16px;
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.btn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: rgba(197, 170, 92, 0.15);
+    border: 2px solid #ffbf00;
+    color: #ffbf00;
+    box-shadow: 0 0 10px rgba(255, 191, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background: #ffbf00;
+    transform: translateY(-2px);
+    color: black;
+    box-shadow: 0 4px 15px rgba(255, 191, 0, 0.5);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid #c5aa5c;
+    color: #c5aa5c;
+}
+
+.btn-secondary:hover {
+    background: #c5aa5c;
+    transform: translateY(-2px);
+    color: black;
+}
+
+/* RTL Support for Arabic */
+.rtl .book-title {
+    font-family: 'Tajawal', sans-serif;
+}
+.rtl .book-description {
+    font-family: 'Tajawal', sans-serif;
+}
+.rtl .btn {
+    font-family: 'Tajawal', sans-serif;
+}
+.rtl .book-author {
+    font-family: 'Tajawal', sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .book-card-large {
+        flex-direction: column;
+    }
+    .book-image-section {
+        padding: 30px;
+    }
+    .book-info-section {
+        padding: 30px;
+    }
+    nav ul {
+        display: none; /* simple mobile fallback */
+    }
+}

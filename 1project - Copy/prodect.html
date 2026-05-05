@@ -1,0 +1,238 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Css/index.css" />
+    <link rel="stylesheet" href="/fontawesome-free-7.1.0-web/css/all.min.css" />
+    <title>Books Store</title>
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="./images/2232688.png" alt="" />
+          <a href="#">Novelix</a>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a class="actev" href="index.html">HOME</a></li>
+            <li><a href="prodect.html">Prodect</a></li>
+            <li><a href="conent.html">Content</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="login.html">Login</a>
+            </li>
+
+            <!-- Search input مع أيقونة البحث ثابتة الحجم -->
+          <li class="search-container" style="position: relative">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search book..."
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div id="suggestions"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+          <section id="books">
+        
+        <h2>Trending Books</h2>
+        <div class="grid">
+          <!-- Book Card 1 -->
+          <div class="card" onclick="window.location.href='Books/Trending/atomic-habits.html'" style="cursor: pointer;">
+            <img src="images/atomic.webp" class="book-img" />
+            <a class="card-title">Atomic Habits</a>
+            <div class="price">LE 150</div>
+            <button class="buy-btn">Buy</button>
+          
+
+          </div>
+
+          <!-- Book Card 2 -->
+          <div class="card" onclick="window.location.href='Books/Trending/psychology-of-money.html'" style="cursor: pointer;">
+            <img src="images/psychology.jpg" class="book-img" />
+              <a class="card-title"> Psychology of Money</a>
+            <div class="price">LE 156</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <!-- Book Card 3 -->
+          <div class="card" onclick="window.location.href='Books/Trending/subtle-art.html'" style="cursor: pointer;">
+            <img src="images/THE.jpg" class="book-img" />
+             <a class="card-title">The Subtle Art</a>
+            <div class="price">LE 158</div>
+            <button class="buy-btn">Buy</button>
+            
+          </div>
+ 
+          <!-- Book Card 4 -->
+           <div class="card" onclick="window.location.href='Books/Trending/deep-work.html'" style="cursor: pointer;">
+            <img src="images/power.jpg" class="book-img" />
+            
+              <a class="card-title">48 Laws of Power</a>
+            <div class="price">LE 900</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+          </div>
+          </section>
+      <!-- ================= English Books ================= -->
+      <section id="eng">
+        <h2>English Books</h2>
+
+        <div class="grid">
+          <div class="card" onclick="window.location.href='Books/English/english-1.html'" style="cursor: pointer;">
+            <img src="images/en1.png" />
+            <a class="card-title">Never lost</a>
+            <div class="price">LE 180</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/English/english-2.html'" style="cursor: pointer;">
+            <img src="images/en2.png" />
+            <a class="card-title">Bloomsbury Harry Potter</a>
+            <div class="price">LE 380</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/English/english-3.html'" style="cursor: pointer;">
+            <img src="images/en3.png" />
+            <a class="card-title">Between Two Worlds</a>
+            <div class="price">LE 260</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/English/english-4.html'" style="cursor: pointer;">
+            <img src="images/en4.png" />
+            <a class="card-title">Disney The Lion King</a>
+            <div class="price">LE 260</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Romantic Books ================= -->
+      <section id="love">
+        <h2>Love books</h2>
+
+        <div class="grid">
+          <div class="card" onclick="window.location.href='Books/Love/love-1.html'" style="cursor: pointer;">
+            <img src="images/img16.png" />
+            <a class="card-title">للقلب مرسى اخير</a>
+            <div class="price">LE 225</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/Love/love-2.html'" style="cursor: pointer;">
+            <img src="images/img15.png" />
+            <a class="card-title">الوسادة الخالية</a>
+            <div class="price">LE 200</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/Love/love-3.html'" style="cursor: pointer;">
+            <img src="images/img14.png" />
+            <a class="card-title">أنت مني</a>
+            <div class="price">LE 225</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/Love/love-4.html'" style="cursor: pointer;">
+            <img src="images/img13.png" />
+            <a class="card-title">صدفة</a>
+            <div class="price">LE 80</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Science Fiction ================= -->
+      <section id="scie">
+        <h2>Science Fiction</h2>
+
+        <div class="grid">
+          <div class="card" onclick="window.location.href='Books/Sci-Fi/sci-fi-1.html'" style="cursor: pointer;">
+            <img src="images/ss.jfif" />
+            <a class="card-title">Artificial Intelligence</a>
+            <div class="price">LE 225</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/Sci-Fi/sci-fi-2.html'" style="cursor: pointer;">
+            <img src="images/sa.jfif" />
+            <a class="card-title">Night</a>
+            <div class="price">LE 150</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/Sci-Fi/sci-fi-3.html'" style="cursor: pointer;">
+            <img src="images/sb.jfif" />
+            <a class="card-title">Ranch</a>
+            <div class="price">LE 360</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+
+          <div class="card" onclick="window.location.href='Books/Sci-Fi/sci-fi-4.html'" style="cursor: pointer;">
+            <img src="images/img9.png" />
+            <a class="card-title">Celestial Horizons</a>
+            <div class="price">LE 150</div>
+            <button class="buy-btn">Buy</button>
+          </div>
+        </div>
+      </section>
+    </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const suggestions = document.getElementById("suggestions");
+
+  searchInput.addEventListener("input", async function () {
+    const value = searchInput.value.trim();
+
+    // لو فاضي اقفل القائمة
+    if (value.length === 0) {
+      suggestions.style.display = "none";
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:3000/search?q=${value}`);
+      const data = await res.json();
+
+      // لو مفيش نتائج
+      if (!data.length) {
+        suggestions.style.display = "none";
+        return;
+      }
+
+      // عرض النتائج
+      suggestions.style.display = "block";
+
+      suggestions.innerHTML = data.map(book => `
+        <div onclick="openBook('${book._id}')">
+          ${book.title}
+        </div>
+      `).join("");
+
+    } catch (err) {
+      console.log("Search error:", err);
+    }
+  });
+});
+
+// لما تضغط على كتاب
+function openBook(id) {
+  window.location.href = `prodect.html?id=${id}`;
+}
+</script>
+  </body>
+</html>

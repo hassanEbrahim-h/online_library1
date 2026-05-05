@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Novelix | Sign Up</title>
+
+    <link rel="stylesheet" href="./Css/Sign Up.css" />
+    <link rel="stylesheet" href="/fontawesome-free-7.1.0-web/css/all.min.css" />
+
+    <style>
+      #msgBox {
+        display: none;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="./images/2232688.png" alt="" />
+          <a href="#">Novelix</a>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a class="actev" href="index.html">HOME</a></li>
+            <li><a href="prodect.html">Prodect</a></li>
+            <li><a href="conent.html">Content</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cart.html"class="nav-login-btn"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="login.html">Login</a>
+            </li>
+            <li class="search-container" style="position: relative">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search book..."
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div id="suggestions"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ================= CARD ================= -->
+    <div class="card">
+      <h1>Create Your Account</h1>
+      <p class="subtitle">Join Novelix to start your journey</p>
+
+      <!-- MESSAGE BOX -->
+      <div id="msgBox"></div>
+
+      <!-- FORM -->
+      <form id="signupForm">
+        <div class="row">
+          <div class="field">
+            <label>First Name</label>
+            <input name="firstName" type="text" class="input" required />
+          </div>
+
+          <div class="field">
+            <label>Last Name</label>
+            <input name="lastName" type="text" class="input" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input name="email" type="email" class="input" required />
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input name="password" type="password" class="input" required />
+        </div>
+
+        <div class="field">
+          <label>Confirm Password</label>
+          <input
+            name="confirmPassword"
+            type="password"
+            class="input"
+            required
+          />
+        </div>
+
+        <div class="terms">
+          <input type="checkbox" required />
+          <span>I agree to terms and conditions</span>
+        </div>
+
+        <button type="submit">Create Account</button>
+
+        <p class="login-text">
+          Already have account? <a href="Login.html">Login</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- ================= JS ================= -->
+    <script>
+      const form = document.getElementById("signupForm");
+      const msgBox = document.getElementById("msgBox");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const data = {
+          firstName: form.firstName.value.trim(),
+          lastName: form.lastName.value.trim(),
+          email: form.email.value.trim(),
+          password: form.password.value,
+          confirmPassword: form.confirmPassword.value,
+        };
+
+        // ================= VALIDATION =================
+        if (
+          !data.firstName ||
+          !data.lastName ||
+          !data.email ||
+          !data.password
+        ) {
+          showMsg("Please fill all fields ❌", false);
+          return;
+        }
+
+        if (data.password.length < 6) {
+          showMsg("Password must be at least 6 characters ❌", false);
+          return;
+        }
+
+        if (data.password !== data.confirmPassword) {
+          showMsg("Passwords do not match ❌", false);
+          return;
+        }
+
+        // ================= SEND TO SERVER =================
+        fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.text())
+          .then((result) => {
+            showMsg(result, true);
+
+            // 🔥 redirect to home
+            setTimeout(() => {
+              window.location.href = "Home.html";
+            }, 1500);
+
+            form.reset();
+          })
+          .catch(() => {
+            showMsg("Server error ❌", false);
+          });
+      });
+
+      // ================= MESSAGE FUNCTION =================
+      function showMsg(text, success) {
+        msgBox.style.display = "block";
+        msgBox.innerText = text;
+
+        if (success) {
+          msgBox.style.background = "#4caf50";
+          msgBox.style.color = "#fff";
+        } else {
+          msgBox.style.background = "#f44336";
+          msgBox.style.color = "#fff";
+        }
+
+        setTimeout(() => {
+          msgBox.style.display = "none";
+        }, 3000);
+      }
+    </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const suggestions = document.getElementById("suggestions");
+
+  searchInput.addEventListener("input", async function () {
+    const value = searchInput.value.trim();
+
+    // لو فاضي اقفل القائمة
+    if (value.length === 0) {
+      suggestions.style.display = "none";
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:3000/search?q=${value}`);
+      const data = await res.json();
+
+      // لو مفيش نتائج
+      if (!data.length) {
+        suggestions.style.display = "none";
+        return;
+      }
+
+      // عرض النتائج
+      suggestions.style.display = "block";
+
+      suggestions.innerHTML = data.map(book => `
+        <div onclick="openBook('${book._id}')">
+          ${book.title}
+        </div>
+      `).join("");
+
+    } catch (err) {
+      console.log("Search error:", err);
+    }
+  });
+});
+
+// لما تضغط على كتاب
+function openBook(id) {
+  window.location.href = `Sign Up.html?id=${id}`;
+}
+</script>
+  </body>
+</html>

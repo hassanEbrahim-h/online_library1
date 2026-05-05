@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Css/conect.css" />
+    <link rel="stylesheet" href="/fontawesome-free-7.1.0-web/css/all.min.css" />
+    <title>Contact</title>
+  </head>
+
+  <body>
+    <!-- 🔥 Toast -->
+    <div
+      id="toast"
+      style="
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(40, 167, 69, 0.95);
+        color: white;
+        padding: 14px 24px;
+        border-radius: 8px;
+        display: none;
+        z-index: 9999;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      "
+    >
+      Message sent successfully
+    </div>
+
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="./images/2232688.png" alt="" />
+          <a href="#">Novelix</a>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a class="actev" href="index.html">HOME</a></li>
+            <li><a href="prodect.html">Prodect</a></li>
+            <li><a href="conent.html">Content</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cart.html"class="nav-login-btn"  ><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="login.html">Login</a>
+            </li>
+            <li class="search-container" style="position: relative">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search book..."
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div id="suggestions"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-page">
+      <div class="container">
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <h1>Contact Our Library</h1>
+
+            <p>
+              Welcome to our library communication center. Contact us if you
+              need help finding books, research materials, or accessing digital
+              resources.
+            </p>
+
+            <p>
+              Our mission is to support students and readers in their journey of
+              learning and knowledge.
+            </p>
+
+            <div style="font-weight: bold; margin-top: 20px">
+              Connect with our Library
+            </div>
+
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-tiktok"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div class="contact-form">
+            <form id="contactForm">
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  required
+                />
+              </div>
+
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" required />
+              </div>
+
+              <div class="input-box textarea-box">
+                <i class="fas fa-comment"></i>
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+      const form = document.getElementById("contactForm");
+      const toast = document.getElementById("toast");
+
+      function showToast(message, isError = false) {
+        toast.innerText = message;
+
+        if (isError) {
+          toast.style.background = "rgba(220, 53, 69, 0.95)";
+        } else {
+          toast.style.background = "rgba(40, 167, 69, 0.95)";
+        }
+
+        toast.style.display = "block";
+
+        // fade in
+        setTimeout(() => {
+          toast.style.opacity = "1";
+        }, 50);
+
+        // fade out
+        setTimeout(() => {
+          toast.style.opacity = "0";
+        }, 3500);
+
+        // hide completely
+        setTimeout(() => {
+          toast.style.display = "none";
+        }, 4000);
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = {
+          firstName: form.firstName.value,
+          lastName: form.lastName.value,
+          email: form.email.value,
+          message: form.message.value,
+        };
+
+        try {
+          const res = await fetch("http://localhost:3000/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+
+          if (res.ok) {
+            form.reset(); // reset فورًا
+            showToast("Message sent successfully"); // toast
+          } else {
+            showToast("Something went wrong", true);
+          }
+        } catch (error) {
+          showToast("Error connecting to server", true);
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const suggestions = document.getElementById("suggestions");
+
+        searchInput.addEventListener("input", async function () {
+          const value = searchInput.value.trim();
+
+          // لو فاضي اقفل القائمة
+          if (value.length === 0) {
+            suggestions.style.display = "none";
+            return;
+          }
+
+          try {
+            const res = await fetch(`http://localhost:3000/search?q=${value}`);
+            const data = await res.json();
+
+            // لو مفيش نتائج
+            if (!data.length) {
+              suggestions.style.display = "none";
+              return;
+            }
+
+            // عرض النتائج
+            suggestions.style.display = "block";
+
+            suggestions.innerHTML = data
+              .map(
+                (book) => `
+        <div onclick="openBook('${book._id}')">
+          ${book.title}
+        </div>
+      `,
+              )
+              .join("");
+          } catch (err) {
+            console.log("Search error:", err);
+          }
+        });
+      });
+
+      // لما تضغط على كتاب
+      function openBook(id) {
+        window.location.href = `contect.html?id=${id}`;
+      }
+    </script>
+  </body>
+</html>

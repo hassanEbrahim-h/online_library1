@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novelix | للقلب مرسى اخير</title>
+    <link rel="stylesheet" href="../../Css/book-details.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="container" style="flex-direction: row-reverse;">
+        <div class="logo">
+          <img src="../../images/2232688.png" />
+          <a href="../../Home.html">Novelix</a>
+        </div>
+        <nav>
+          <ul style="flex-direction: row-reverse;">
+            <li><a href="../../Home.html">HOME</a></li>
+            <li><a href="../../prodect.html">PRODECT</a></li>
+            <li><a href="../../conent.html">CONENT</a></li>
+            <li><a href="../../about.html">ABOUT</a></li>
+            <li><a href="../../cart.html"><i class="fas fa-shopping-cart"></i> السلة</a></li>
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="../../login.html">LOGIN</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="book-details-container">
+      <div class="book-card-large">
+        <div class="book-image-section" style="padding: 0;">
+          <img src="../../images/img16.png" alt="للقلب مرسى اخير" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0 20px 20px 0;" />
+        </div>
+        <div class="book-info-section">
+          <h1 class="book-title">للقلب مرسى اخير</h1>
+          <h3 class="book-author"><i class="fas fa-user-edit"></i> كاتب غير معروف</h3>
+          <p class="book-description">
+            رواية رومانسية تأخذك في رحلة إلى أعماق المشاعر.
+          </p>
+          <div class="action-buttons">
+            <button class="btn btn-primary" onclick="addToCart('love-1', 'للقلب مرسى اخير', 225, 'images/img16.png')"><i class="fas fa-cart-plus"></i> إضافة للسلة</button>
+            <a href="../../prodect.html" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> عودة للكتب</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  <script>
+    function addToCart(id, title, price, imageSrc) {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const existingItem = cartItems.find(item => item.id === id);
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cartItems.push({
+                id: id,
+                title: title,
+                price: price,
+                quantity: 1,
+                image: imageSrc
+            });
+        }
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        window.location.href = '../../cart.html';
+    }
+  </script>
+  </body>
+</html>

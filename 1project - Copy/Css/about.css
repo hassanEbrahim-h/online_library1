@@ -1,0 +1,306 @@
+/* =========================
+   RESET
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 3px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================
+   BODY + BACKGROUND
+========================= */
+body {
+  font-family: "Work Sans", sans-serif;
+
+  /* Background with overlay */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/gettyimages-1437365584-612x612.jpg");
+
+  background-size: 120% 120%;
+  background-position: center;
+  background-attachment: fixed;
+
+  color: white;
+
+  /* Background animation */
+  animation: bgMove 11s infinite alternate ease-in-out;
+}
+
+/* Background movement animation */
+@keyframes bgMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 20% 20%;
+  }
+}
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  background-color: #242426;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .container .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .container .logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar .container .logo a {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.navbar .container nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navbar .container nav ul input {
+  border-radius: 5px;
+  padding: 8px;
+  margin-left: 9px;
+  border: none;
+  outline: none;
+}
+
+.navbar .container nav li a {
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  position: relative;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.navbar .container nav li a::before {
+  width: 100%;
+  height: 3px;
+  content: "";
+  position: absolute;
+  background-color: aliceblue;
+  left: -100%;
+  top: 0;
+  transition: 1s;
+  opacity: 0;
+}
+
+.navbar .container nav li a:hover::before {
+  left: 0px;
+  opacity: 1;
+}
+
+.navbar .container nav li a:hover {
+  background-color: #5e0000;
+}
+
+.nav-login-box {
+  margin-left: auto;
+}
+
+.nav-login-btn,
+.navbar .container nav li a[href*="cart.html"] {
+  background-color: rgb(190, 169, 44) !important;
+  padding: 8px 18px !important;
+  border-radius: 6px !important;
+  color: black !important;
+  font-weight: bold !important;
+  transition: 0.3s;
+}
+
+.nav-login-btn:hover,
+.navbar .container nav li a[href*="cart.html"]:hover {
+  background-color: #ffbf00 !important;
+  color: black !important;
+}
+
+.nav-login-btn::before,
+.navbar .container nav li a[href*="cart.html"]::before {
+  display: none !important;
+}
+/* =========================
+   SEARCH INPUT WITH ICON
+========================= */
+.search-container {
+  position: relative; /* علشان نخلي الأيقونة على جنب الـ input */
+  display: inline-block;
+}
+
+.search-container input {
+  border-radius: 5px;
+  padding: 8px 30px 8px 8px; /* خلي مساحة على الشمال أو اليمين للأيقونة */
+  margin-left: 9px;
+  border: none;
+  outline: none;
+  width: 180px; /* خليك ثابت زي ما هو */
+}
+
+/* أيقونة البحث */
+.search-container i {
+  position: absolute;
+  right: 10px; /* مكان الأيقونة على اليمين داخل الـ input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000; /* لون الأيقونة */
+  pointer-events: none; /* عشان ما تمنعش الكتابة */
+  transition: 0.2s;
+}
+
+/* اختفاء placeholder والأيقونة أول ما يبدأ المستخدم يكتب */
+.search-container input:not(:placeholder-shown) + i {
+  opacity: 0;  
+  visibility: hidden;
+}
+#suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 180px; /* نفس عرض input بتاعك */
+  background:rgb(190, 169, 44);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+#suggestions div {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#suggestions div:hover {
+  background: #5e0000;
+}
+/* =========================
+   CONTAINER SYSTEM
+========================= */
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+/* Small Desktop */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* =========================
+   SECTIONS
+========================= */
+.section {
+  height: 58vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+
+/* Section container layout */
+.section .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Reverse section */
+.reverse {
+  flex-direction: row-reverse;
+}
+
+/* =========================
+   TEXT
+========================= */
+.text {
+  max-width: 600px;
+}
+
+/* Title */
+.text h1 {
+  font-size: 40px;
+  margin-bottom: 25px;
+  color: white;
+}
+
+/* Paragraph */
+.text p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #e5e5e5;
+}
+
+/* =========================
+   IMAGES
+========================= */
+.image img {
+  width: 520px;
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.text button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  background: #c5aa5c;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Button hover */
+.text button:hover {
+  background: #ffbf00;
+}

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./Css/index.css" />
+  <link rel="stylesheet" href="./Css/cart.css" />
+  <link rel="stylesheet" href="/fontawesome-free-7.1.0-web/css/all.min.css" />
+  <title>Shopping Cart - Novelix</title>
+</head>
+
+<body>
+  <!-- ================= NAVBAR ================= -->
+  <div class="navbar">
+    <div class="container">
+      <div class="logo">
+        <img src="./images/2232688.png" alt="" />
+        <a href="#">Novelix</a>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="prodect.html">Prodect</a></li>
+          <li><a href="conent.html">Content</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a class="actev" href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+          <li class="nav-login-box">
+            <a class="nav-login-btn" href="login.html">Login</a>
+          </li>
+
+          <!-- Search input -->
+          <li class="search-container" style="position: relative">
+            <input id="searchInput" type="search" placeholder="Search book..." />
+            <i class="fas fa-search search-icon"></i>
+            <div id="suggestions"></div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ================= CART SECTION ================= -->
+  <div class="cart-container container" style="margin-top: 120px; min-height: 60vh;">
+    <h2 class="section-title">Your Shopping Cart</h2>
+
+    <div class="cart-content">
+      <!-- Cart Items Table -->
+      <div class="cart-items">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items-body">
+            <!-- Cart items will be rendered here by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-item">
+          <span>Subtotal</span>
+          <span id="subtotal-price">LE 0.00</span>
+        </div>
+        <div class="summary-item">
+          <span>Shipping</span>
+          <span>LE 50.00</span>
+        </div>
+        <hr />
+        <div class="summary-item total">
+          <span>Total</span>
+          <span id="total-price">LE 0.00</span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Novelix</h3>
+        <p>
+          Novelix is a creative library offering a wide range of books,
+          workshops, and community events for all ages.
+        </p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Working Hours</h3>
+        <p>Saturday - Thursday: 9:00 AM - 9:00 PM</p>
+        <p>Friday: 2:00 PM - 10:00 PM</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>Phone: +201017754736</p>
+        <p>Address: 123 Novelix Street, EL Fayoum, Egypt</p>
+        <p>Email: abdo@Novelix.com</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="symbol">&copy;</span> 2025 Novelix . All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    
+    //  هنا بنستخدم LocalStorage مؤقتاً عشان نحفظ المنتجات اللي في السلة.
+    // قدام شوية المفروض تبدل ده وتربطه بالـ Database بتاعتك.
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    const shippingCost = 50.00;
+
+    // Function to save cart to LocalStorage
+    function saveCart() {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+
+    // Function to render cart items on the page
+    function renderCart() {
+      const cartBody = document.getElementById("cart-items-body");
+      cartBody.innerHTML = "";
+
+      if (cartItems.length === 0) {
+        cartBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 30px;">Your cart is empty! <br><br> <a href="prodect.html" style="color:#f0a500;">Go to Shop</a></td></tr>`;
+        updateSummary(0);
+        return;
+      }
+
+      let subtotal = 0;
+
+      cartItems.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>
+              <div class="cart-item-info">
+                <img src="${item.image}" alt="${item.title}" onerror="this.src='./images/download1234.jfif'">
+                <h4>${item.title}</h4>
+              </div>
+            </td>
+            <td>LE ${item.price.toFixed(2)}</td>
+            <td>
+              <div class="quantity-control">
+                <button onclick="updateQuantity('${item.id}', -1)">-</button>
+                <input type="text" value="${item.quantity}" readonly>
+                <button onclick="updateQuantity('${item.id}', 1)">+</button>
+              </div>
+            </td>
+            <td>LE ${itemTotal.toFixed(2)}</td>
+            <td>
+              <button class="remove-btn" onclick="removeItem('${item.id}')">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          `;
+        cartBody.appendChild(tr);
+      });
+
+      updateSummary(subtotal);
+    }
+
+    // Function to update the summary section
+    function updateSummary(subtotal) {
+      document.getElementById("subtotal-price").innerText = `LE ${subtotal.toFixed(2)}`;
+
+      const total = subtotal > 0 ? subtotal + shippingCost : 0;
+      document.getElementById("total-price").innerText = `LE ${total.toFixed(2)}`;
+    }
+
+    // Function to change item quantity
+    function updateQuantity(id, change) {
+      const item = cartItems.find(i => i.id == id);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity < 1) item.quantity = 1;
+        saveCart();
+        renderCart();
+        // بص يا هندسة: هنا هتعمل الـ API بتاعك عشان تسمّع تعديل الكمية في الداتا بيز
+      }
+    }
+
+    // Function to remove item from cart
+    function removeItem(id) {
+      cartItems = cartItems.filter(item => item.id != id);
+      saveCart();
+      renderCart();
+      // يا ريس: هنا تضرب الـ API اللي هيمسح المنتج من الداتا بيز
+    }
+
+    // Function for checkout
+    function checkout() {
+      if (cartItems.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      alert("Proceeding to checkout... Backend logic goes here!");
+      // : بعد ما الدفع يخلص، توديه لصفحة الدفع الحقيقية أو تفضي السلة خالص
+      // cartItems = [];
+      // saveCart();
+      // renderCart();
+    }
+
+    // Search functionality (reused from Home.html)
+    document.addEventListener("DOMContentLoaded", function () {
+      renderCart(); // Initial render of the cart
+
+      const searchInput = document.getElementById("searchInput");
+      const suggestions = document.getElementById("suggestions");
+
+      if (searchInput) {
+        searchInput.addEventListener("input", async function () {
+          const value = searchInput.value.trim();
+          if (value.length === 0) {
+            suggestions.style.display = "none";
+            return;
+          }
+          try {
+            const res = await fetch(`http://localhost:3000/search?q=${value}`);
+            const data = await res.json();
+            if (!data.length) {
+              suggestions.style.display = "none";
+              return;
+            }
+            suggestions.style.display = "block";
+            suggestions.innerHTML = data
+              .map((book) => `<div onclick="openBook('${book._id}')">${book.title}</div>`)
+              .join("");
+          } catch (err) {
+            console.log("Search error:", err);
+          }
+        });
+      }
+    });
+
+    function openBook(id) {
+      window.location.href = `Home.html?id=${id}`;
+    }
+  </script>
+</body>
+
+</html>

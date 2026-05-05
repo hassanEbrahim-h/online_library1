@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="./Css/about.css" />
+    <link rel="stylesheet" href="/fontawesome-free-7.1.0-web/css/all.min.css" />
+
+    <title>About</title>
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="images/2232688.png" alt="" />
+          <a href="#">Novelix</a>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a class="actev" href="index.html">HOME</a></li>
+            <li><a href="prodect.html">Prodect</a></li>
+            <li><a href="conent.html">Content</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cart.html" class="nav-login-btn"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="login.html">Login</a>
+            </li>
+
+            <!-- Search input مع أيقونة البحث ثابتة الحجم -->
+            <li class="search-container" style="position: relative">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search book..."
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div id="suggestions"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- =========================
+         SECTION 1: About Our Library
+    ========================== -->
+    <section class="section">
+      <div class="container">
+        <!-- Text Content -->
+        <div class="text">
+          <h1>About Our Library</h1>
+          <p>
+            <strong>Our library</strong> is a modern educational institution
+            that aims to spread knowledge, culture, and scientific awareness
+            among students and researchers. We provide access to thousands of
+            physical and digital books covering different scientific, literary,
+            and historical fields. The library is designed to provide a quiet
+            and comfortable environment that helps visitors focus, study, and
+            develop their academic and intellectual skills. We believe that
+            knowledge is the most powerful tool for building strong individuals
+            and advanced societies in the modern world.
+          </p>
+
+          <button>Read More</button>
+        </div>
+
+        <!-- Image -->
+        <div class="image">
+          <img src="images/photojfif.jfif" alt="Library Image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         SECTION 2: Library History
+    ========================== -->
+    <section class="section">
+      <div class="container reverse">
+        <!-- Text Content -->
+        <div class="text">
+          <h1>Library History</h1>
+          <p>
+            <strong>Our library</strong> was founded many years ago with the
+            goal of supporting education and spreading cultural awareness in the
+            community. It started as a small collection of books and gradually
+            developed into a large educational center that serves thousands of
+            visitors annually. Over time, the library has adopted modern
+            technology, including digital archives, online research tools, and
+            electronic learning platforms to keep up with the rapid development
+            of education and information technology.
+          </p>
+        </div>
+
+        <!-- Image -->
+        <div class="image">
+          <img src="./images/photo-2.jfif" alt="Library History" />
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         SECTION 3: Importance of Reading
+    ========================== -->
+    <section class="section">
+      <div class="container">
+        <!-- Text Content -->
+        <div class="text">
+          <h1>Importance of Reading</h1>
+          <p>
+            <strong>Reading</strong> is one of the most important habits for
+            personal and academic success. It helps improve language skills,
+            memory strength, and creative thinking ability. Reading also allows
+            people to explore new cultures, learn about different sciences, and
+            gain knowledge about history, technology, and social development.
+            Books are considered one of the best tools for self-development and
+            intellectual growth throughout human life.
+          </p>
+        </div>
+
+        <!-- Image -->
+        <div class="image">
+          <img src="./images/photo-1.jfif" alt="Importance of Reading" />
+        </div>
+      </div>
+    </section>
+    <!-- باقي الصفحة -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const suggestions = document.getElementById("suggestions");
+
+        searchInput.addEventListener("input", async function () {
+          const value = searchInput.value.trim();
+
+          // لو فاضي اقفل القائمة
+          if (value.length === 0) {
+            suggestions.style.display = "none";
+            return;
+          }
+
+          try {
+            const res = await fetch(`http://localhost:3000/search?q=${value}`);
+            const data = await res.json();
+
+            // لو مفيش نتائج
+            if (!data.length) {
+              suggestions.style.display = "none";
+              return;
+            }
+
+            // عرض النتائج
+            suggestions.style.display = "block";
+
+            suggestions.innerHTML = data
+              .map(
+                (book) => `
+        <div onclick="openBook('${book._id}')">
+          ${book.title}
+        </div>
+      `,
+              )
+              .join("");
+          } catch (err) {
+            console.log("Search error:", err);
+          }
+        });
+      });
+
+      // لما تضغط على كتاب
+      function openBook(id) {
+        window.location.href = `about.html?id=${id}`;
+      }
+    </script>
+  </body>
+</html>

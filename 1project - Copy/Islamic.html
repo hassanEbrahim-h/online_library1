@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novelix | الكتب الإسلامية</title>
+
+    <link rel="stylesheet" href="./Css/Islamic.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="./images/2232688.png" />
+          <a href="#">Novelix</a>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a class="actev" href="index.html">HOME</a></li>
+            <li><a href="prodect.html">PRODECT</a></li>
+            <li><a href="conent.html">CONENT</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> CART</a></li>
+
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="login.html">LOGIN</a>
+            </li>
+
+            <li class="search-container" style="position: relative">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search book..."
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div id="suggestions"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- عنوان الصفحة -->
+    <h1>📚 الكتب الإسلامية</h1>
+
+    <!-- الكتب -->
+    <div class="books-grid">
+      <div class="card" id="quran" >
+        <i class="fas fa-quran"></i>
+        <h3>القرآن الكريم</h3>
+        <span>كلام الله</span>
+        <p>نور القلوب ودستور الأمة الإسلامية الخالد.</p>
+              <a href="Books pdf/arabic-quran.pdf" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+    
+
+      <div class="card" id="bukhari">
+        <i class="fas fa-book"></i>
+        <h3>صحيح البخاري</h3>
+        <span>الإمام البخاري</span>
+        <p>أوثق المراجع في سنة النبي ﷺ بعد القرآن.</p>
+                 <a href="Books pdf/sahih-al-bukhari-arabic-vol-1.pdf" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="riyad">
+        <i class="fas fa-mosque"></i>
+        <h3>رياض الصالحين</h3>
+        <span>الإمام النووي</span>
+        <p>منهاج المسلم في الأخلاق والآداب والعبادة.</p>
+        <a href="Books pdf/RIYĀDHUSH SHĀLIHĪN.pdf" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="tafsir">
+        <i class="fas fa-scroll"></i>
+        <h3>تفسير ابن كثير</h3>
+        <span>ابن كثير</span>
+        <p>شرح ميسر لآيات الذكر الحكيم.</p>
+         
+       <a href="Books pdf/تفسير ابن كثير.pdf" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="zad">
+        <i class="fas fa-pen-nib"></i>
+        <h3>زاد المعاد</h3>
+        <span>ابن القيم</span>
+        <p>فقه السيرة النبوية في جوانب الحياة.</p>
+             <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="hisn">
+        <i class="fas fa-shield-alt"></i>
+        <h3>حصن المسلم</h3>
+        <span>أذكار مأثورة</span>
+        <p>دليل يومي للتقرب إلى الله بالأذكار.</p>
+              <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="muwatta">
+        <i class="fas fa-balance-scale"></i>
+        <h3>الموطأ</h3>
+        <span>الإمام مالك</span>
+        <p>جامع للفقه والحديث.</p>
+              <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="ihya">
+        <i class="fas fa-heart"></i>
+        <h3>إحياء علوم الدين</h3>
+        <span>الغزالي</span>
+        <p>موسوعة في إصلاح النفوس.</p>
+              <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="rahiq">
+        <i class="fas fa-star"></i>
+        <h3>الرحيق المختوم</h3>
+        <span>المباركفوري</span>
+        <p>من أجمل كتب السيرة النبوية.</p>
+              <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="bidaya">
+        <i class="fas fa-history"></i>
+        <h3>البداية والنهاية</h3>
+        <span>ابن كثير</span>
+        <p>تاريخ الأمم منذ بدء الخليقة.</p>
+              <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="madarij">
+        <i class="fas fa-feather"></i>
+        <h3>مدارج السالكين</h3>
+        <span>ابن القيم</span>
+        <p>رحلة إيمانية في السير إلى الله.</p>
+              <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+
+      <div class="card" id="azkar">
+        <i class="fas fa-pray"></i>
+        <h3>الأذكار</h3>
+        <span>الإمام النووي</span>
+        <p>أدعية وأذكار يومية للمسلم.</p>
+              <a href="#" target="_blank">
+       <button  class="book-btn">اقرأ الكتاب</button>
+      </a>
+      </div>
+    </div>
+
+    <!-- ================= SCRIPT (FIXED) ================= -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const suggestions = document.getElementById("suggestions");
+
+        searchInput.addEventListener("input", async function () {
+          const value = searchInput.value.trim();
+
+          if (value.length === 0) {
+            suggestions.style.display = "none";
+            return;
+          }
+
+          try {
+            const res = await fetch(`http://localhost:3000/search?q=${value}`);
+            const data = await res.json();
+
+            if (!data.length) {
+              suggestions.style.display = "none";
+              return;
+            }
+
+            suggestions.style.display = "block";
+
+            suggestions.innerHTML = data
+              .map(
+                (book) => `
+              <div onclick="openBook('${book.title.toLowerCase().replace(/ /g, "-")}')">
+                ${book.title}
+              </div>
+            `,
+              )
+              .join("");
+          } catch (err) {
+            console.log("Search error:", err);
+          }
+        });
+      });
+
+      // Scroll داخل الصفحة
+      function openBook(id) {
+        document.getElementById(id)?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    </script>
+  </body>
+</html>

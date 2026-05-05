@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Novelix | Log in</title>
+    <link rel="stylesheet" href="./Css/Login.css" />
+    <link rel="stylesheet" href="/fontawesome-free-7.1.0-web/css/all.min.css" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="./images/2232688.png" alt="" />
+          <a href="#">Novelix</a>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a class="actev" href="index.html">HOME</a></li>
+            <li><a href="prodect.html">Prodect</a></li>
+            <li><a href="conent.html">Content</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cart.html"class="nav-login-btn"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+            <li class="nav-login-box">
+              <a class="nav-login-btn" href="login.html">Login</a>
+            </li>
+
+                <li class="search-container" style="position: relative">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search book..."
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div id="suggestions"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ================= LOGIN CARD ================= -->
+    <div class="card">
+      <h1>Log in to Novelix</h1>
+      <p class="subtitle">"Welcome back! Please sign in to your account."</p>
+
+      <div
+        id="msg"
+        style="
+          display: none;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 6px;
+          text-align: center;
+        "
+      ></div>
+
+      <form id="loginForm">
+        <div class="field">
+          <label>Email</label>
+          <input name="email" class="input" type="email" required />
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input name="password" class="input" type="password" required />
+        </div>
+
+        <button type="submit">Log in</button>
+
+        <p class="helper-text">
+          Don’t have an account?
+          <a href="Sign Up.html">Create one</a>
+        </p>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+        const msg = document.getElementById("msg");
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const email = form.email.value.trim();
+          const password = form.password.value.trim();
+
+          // ================= VALIDATION =================
+          if (!email || !password) {
+            return showMsg("Please fill all fields ❌", false);
+          }
+
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            return showMsg("Invalid email ❌", false);
+          }
+
+          // ================= SEND =================
+          try {
+            const res = await fetch("http://localhost:3000/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            });
+
+            const data = await res.json();
+
+            if (!data.success) {
+              return showMsg("Invalid email or password ❌", false);
+            }
+
+            showMsg("Login successful ✔", true);
+
+            // save token
+            localStorage.setItem("token", data.token);
+
+            setTimeout(() => {
+              window.location.href = "Home.html";
+            }, 1000);
+          } catch {
+            showMsg("Server error ❌", false);
+          }
+        });
+
+        // ================= MESSAGE FUNCTION =================
+        function showMsg(text, success) {
+          msg.style.display = "block";
+          msg.innerText = text;
+
+          msg.style.background = success ? "#4caf50" : "#f44336";
+          msg.style.color = "#fff";
+
+          setTimeout(() => {
+            msg.style.display = "none";
+          }, 3000);
+        }
+      });
+    </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const suggestions = document.getElementById("suggestions");
+
+  searchInput.addEventListener("input", async function () {
+    const value = searchInput.value.trim();
+
+    // لو فاضي اقفل القائمة
+    if (value.length === 0) {
+      suggestions.style.display = "none";
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:3000/search?q=${value}`);
+      const data = await res.json();
+
+      // لو مفيش نتائج
+      if (!data.length) {
+        suggestions.style.display = "none";
+        return;
+      }
+
+      // عرض النتائج
+      suggestions.style.display = "block";
+
+      suggestions.innerHTML = data.map(book => `
+        <div onclick="openBook('${book._id}')">
+          ${book.title}
+        </div>
+      `).join("");
+
+    } catch (err) {
+      console.log("Search error:", err);
+    }
+  });
+});
+
+// لما تضغط على كتاب
+function openBook(id) {
+  window.location.href = `Login.html?id=${id}`;
+}
+</script>
+  </body>
+</html>

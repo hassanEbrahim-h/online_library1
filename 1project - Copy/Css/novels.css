@@ -1,0 +1,312 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 3px;
+}
+
+/* Remove underline from links */
+a {
+  text-decoration: none;
+}
+
+/* Remove bullets from lists */
+ul li {
+  list-style: none;
+}
+
+/* =========================
+   Body Styling + Background Animation
+========================= */
+body {
+  font-family: "Work Sans", sans-serif;
+
+  /* Background image with dark overlay */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../images/gettyimages-1437365584-612x612.jpg");
+
+  background-size: 120% 120%;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  color: white;
+  text-align: center;
+
+  /* Background animation */
+  animation: bgMove 11s infinite alternate ease-in-out;
+}
+
+/* Background movement animation */
+@keyframes bgMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 20% 20%;
+  }
+}
+/* =========================
+   SEARCH INPUT WITH ICON
+========================= */
+.search-container {
+  position: relative; /* علشان نخلي الأيقونة على جنب الـ input */
+  display: inline-block;
+}
+
+.search-container input {
+  border-radius: 5px;
+  padding: 8px 30px 8px 8px; /* خلي مساحة على الشمال أو اليمين للأيقونة */
+  margin-left: 9px;
+  border: none;
+  outline: none;
+  width: 180px; /* خليك ثابت زي ما هو */
+}
+
+/* أيقونة البحث */
+.search-container i {
+  position: absolute;
+  right: 10px; /* مكان الأيقونة على اليمين داخل الـ input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000; /* لون الأيقونة */
+  pointer-events: none; /* عشان ما تمنعش الكتابة */
+  transition: 0.2s;
+}
+
+#suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 180px; /* نفس عرض input بتاعك */
+  background: rgb(190, 169, 44);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+#suggestions div {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#suggestions div:hover {
+  background:#5e0000;
+}
+/* =========================
+   Section Title
+========================= */
+.title {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+/* =========================
+   Container (Responsive Layout)
+========================= */
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+/* Small Desktop */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* =========================
+   Navbar
+   (لم يتم تغيير أي شيء)
+========================= */
+.navbar {
+  background-color: #242426;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Navbar container layout */
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo container */
+.navbar .container .logo {
+  align-items: center;
+  display: flex;
+}
+
+/* Logo image */
+.navbar .container .logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* Logo text */
+.navbar .container .logo a {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Navigation list */
+.navbar .container nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* Search input inside navbar */
+.navbar .container nav ul input {
+  border-radius: 5px;
+  padding: 8px;
+  margin-left: 9px;
+  border: none;
+  outline: none;
+}
+
+/* Navbar links */
+.navbar .container nav li a {
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  position: relative;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.nav-login-btn {
+  background-color: rgb(190, 169, 44);
+  padding: 8px 18px;
+  border-radius: 6px;
+  color: black;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* Hover top line animation */
+.navbar .container nav li a::before {
+  width: 100%;
+  height: 3px;
+  content: "";
+  position: absolute;
+  background-color: aliceblue;
+  left: -100%;
+  transition: 1s;
+  opacity: 0;
+  top: 0;
+}
+
+/* Show line on hover */
+.navbar .container nav li a:hover:before {
+  left: 0px;
+  opacity: 1;
+}
+
+/* Navbar hover background */
+.navbar .container nav li a:hover {
+  background-color: #5e0000;
+}
+
+.books {
+  padding: 40px 0;
+}
+
+.title {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.book-card {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 30px;
+  border-radius: 18px;
+  backdrop-filter: blur(8px);
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  text-align: center;
+}
+
+.book-card:hover {
+  transform: translateY(-10px);
+}
+
+.book-img {
+  width: 120px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.book-card h2 {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.book-card h4 {
+  color: #ffd54f;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.book-card p {
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+.book-btn{
+    margin-top: 12px;
+    padding: 8px 18px;
+    background: rgba(255, 193, 7, 0.9);
+    color: #111;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.book-btn:hover{
+    transform: translateY(-2px);
+    background: #ffc107;
+}

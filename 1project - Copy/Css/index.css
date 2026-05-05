@@ -1,0 +1,635 @@
+/* =========================
+   RESET & GLOBAL
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 3px;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+/* =========================
+   BODY & BACKGROUND
+========================= */
+body {
+  font-family: "Work Sans", sans-serif;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../images/gettyimages-1437365584-612x612.jpg");
+  background-size: 120% 120%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: white;
+
+  animation: bgMove 11s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 20% 20%;
+  }
+}
+
+/* =========================
+   CONTAINER SYSTEM
+========================= */
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  background-color: #242426;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .container .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .container .logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar .container .logo a {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.navbar .container nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navbar .container nav ul input {
+  border-radius: 5px;
+  padding: 8px;
+  margin-left: 9px;
+  border: none;
+  outline: none;
+}
+
+.navbar .container nav li a {
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  position: relative;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.navbar .container nav li a::before {
+  width: 100%;
+  height: 3px;
+  content: "";
+  position: absolute;
+  background-color: aliceblue;
+  left: -100%;
+  top: 0;
+  transition: 1s;
+  opacity: 0;
+}
+
+.navbar .container nav li a:hover::before {
+  left: 0px;
+  opacity: 1;
+}
+
+.navbar .container nav li a:hover {
+  background-color: #5e0000;
+}
+
+.nav-login-box {
+  margin-left: auto;
+}
+
+.nav-login-btn,
+.navbar .container nav li a[href*="cart.html"] {
+  background-color: rgb(190, 169, 44) !important;
+  padding: 8px 18px !important;
+  border-radius: 6px !important;
+  color: black !important;
+  font-weight: bold !important;
+  transition: 0.3s;
+}
+
+.nav-login-btn:hover,
+.navbar .container nav li a[href*="cart.html"]:hover {
+  background-color: #ffbf00 !important;
+  color: black !important;
+}
+
+.nav-login-btn::before,
+.navbar .container nav li a[href*="cart.html"]::before {
+  display: none !important;
+}
+/* =========================
+   SEARCH INPUT WITH ICON
+========================= */
+.search-container {
+  position: relative; /* علشان نخلي الأيقونة على جنب الـ input */
+  display: inline-block;
+}
+
+.search-container input {
+  border-radius: 5px;
+  padding: 8px 30px 8px 8px; /* خلي مساحة على الشمال أو اليمين للأيقونة */
+  margin-left: 9px;
+  border: none;
+  outline: none;
+  width: 180px; /* خليك ثابت زي ما هو */
+}
+
+/* أيقونة البحث */
+.search-container i {
+  position: absolute;
+  right: 10px; /* مكان الأيقونة على اليمين داخل الـ input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000; /* لون الأيقونة */
+  pointer-events: none; /* عشان ما تمنعش الكتابة */
+  transition: 0.2s;
+}
+
+/* اختفاء placeholder والأيقونة أول ما يبدأ المستخدم يكتب */
+.search-container input:not(:placeholder-shown) + i {
+  opacity: 0;  
+  visibility: hidden;
+}
+#suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 180px; /* نفس عرض input بتاعك */
+  background:rgb(190, 169, 44);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+#suggestions div {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#suggestions div:hover {
+  background: #5e0000;
+}
+/* ============HOME SECTION============== */
+.home {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home .container div {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+}
+
+.home .container div h1 {
+  font-size: 45px;
+}
+
+.home .container div p {
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.home .container div a {
+  display: inline-block;
+  padding: 10px 9px;
+  background-color: #c5aa5c;
+  color: black;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.4s;
+}
+
+
+.home .container div a:hover {
+  transform: scale(1.07);
+  background: #ffbf00;
+  color: black;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+.section-title {
+  text-align: center;
+  margin: 6px 0 30px;
+  color: white;
+  font-size: 35px;
+}
+
+#down {
+  scroll-margin-top: 63px;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+.categories {
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.category {
+  width: 220px;
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.category-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 80px;
+  margin-bottom: 8px;
+  border: 4px solid #1e1e2f;
+  transition: 0.4s;
+}
+
+.category:hover .category-img {
+  border-color: #ffc107;
+  transform: scale(1.08);
+}
+
+.title1 {
+  color: white;
+  font-size: 18px;
+  margin: 7px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #c5aa5c;
+  color: black;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.4s;
+}
+
+.btn:hover {
+  transform: scale(1.07);
+  background: #ffbf00;
+  color: black;
+}
+
+/* =========================
+   BOOKS SECTION
+========================= */
+.books-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.books-container {
+  padding: 40px;
+  background-color: #1e1e2f;
+}
+
+.books-container .books-title {
+  color: white;
+  margin: 20px;
+  padding: 20px;
+}
+
+.books-container .box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+}
+
+.book {
+  margin: 15px 0;
+}
+
+.book-p {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 17px;
+  color: #fff;
+  width: 190px;
+  line-height: 1.5;
+}
+
+.book img {
+  width: 190px;
+  height: 190px;
+  border-radius: 50px;
+  transition: transform 0.3s;
+}
+
+.book img:hover {
+  transform: scale(1.09);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background-color: #222;
+  color: #fff;
+  padding: 50px 30px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: -30px auto;
+  gap: 20px;
+  margin-right: 20px;
+}
+
+.footer-section {
+  width: 30%;
+}
+
+.footer-section h3 {
+  margin-bottom: 20px;
+  font-size: 1.3em;
+  color: #f0a500;
+}
+
+.footer-section p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  color: #bbb;
+}
+
+.social-icons {
+  display: flex;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.social-icons a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6em;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #f0a500;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #444;
+  padding-top: 20px;
+  font-size: 0.9em;
+  color: #bbb;
+}
+
+.footer-bottom .symbol {
+  font-size: 1.5rem;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+/* =========================
+   SEARCH PAGE
+========================= */
+.address-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.search-box {
+  width: 600px;
+  height: 48px;
+  border: 1px solid #000;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  margin-top: 20px;
+  gap: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 15px #00000043;
+}
+
+.search-box i {
+  font-size: 20px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  background: none;
+}
+
+/* =========================
+   CARDS
+========================= */
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 50px;
+  letter-spacing: 1px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+}
+
+.card {
+   background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.2);
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  transition: 0.4s ease;
+  
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.card:hover img {
+  transform: scale(1.07);
+  filter: brightness(1.1);
+}
+
+.card-title {
+  display: block;
+  margin: 12px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+.price {
+  color: #d5e7d9;
+  margin: 12px 0;
+  width: 230px;
+  font-size: 20px;
+  
+}
+
+.buy-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background:  #c5aa5c;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.buy-btn:hover {
+  transform: scale(1.08);
+  background: #ffbf00;
+  box-shadow: 0 8px 20px rgba(194, 192, 30, 0.5);
+}
+
+/* =========================
+   SCROLL BUTTON
+========================= */
+.scroll-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #17a2a8;
+  color: white;
+  padding: 14px;
+  border-radius: 50%;
+  display: none;
+  text-decoration: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  transition: 0.4s;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-6px) scale(1.1);
+}
+
+/* =========================
+   SHOW BOOK BUTTON HOVER (اضافة فقط)
+========================= */
+
+.home .container div a {
+  transition: 0.3s;
+}
+
+.home .container div a:hover {
+  transform: scale(1.1);
+  background-color: #ffbf00;
+}
+
+/* تحسين بسيط لظهور العنوان */
+.home .container div h1 {
+  letter-spacing: 1px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.home .container div p {
+  letter-spacing: 1px;
+}
